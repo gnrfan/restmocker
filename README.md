@@ -14,4 +14,9 @@ The administrator's UI is mostly a vanilla Django admin one but works nicely for
 
 At Bit Zeppelin, we're using this tool for easing up our iPhone developing tasks. We hope this little product is helpful for you. 
 
+License
+=======
+
+RESTMocker is distributed under the BSD license.
+
 (C) 2011 - Antonio Ognio <antonio@bitzeppelin.com>
