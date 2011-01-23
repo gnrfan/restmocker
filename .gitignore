@@ -1,0 +1,5 @@
+restmocker.db
+local_settings.py
+*.pyc
+*.swp
+.DS_Store

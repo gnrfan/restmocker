@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% load paginator %}
+{% block content %}
+<h1>Realms</h1>
+{% if object_list %}
+<ul id="realm_list">
+{% for realm in object_list %}
+<li><p class="real_name"><a href="{% url document_index realm.prefix %}">{{ realm.name }}</a></p></li>
+{% endfor %}
+</ul>
+{% if is_paginated %}{% paginator %}{% endif %}
+{% else %}
+<p>No realms available. Please create some on the admin.</p>
+{% endif %}
+{% endblock %}

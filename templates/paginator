@@ -1,0 +1,21 @@
+{% spaceless %}
+<div class="paginator">
+  {% if has_previous %}
+  <a href="?{{querystring}}page={{ previous }}" title="Previous page" 
+     class="left_side">&lt;&lt; Prev</a>&nbsp; 
+  {% endif %}
+  {% for num in page_numbers %}
+      {% ifequal num page %}
+          <a href="?{{querystring}}page={{ num }}" title="Page {{num}}"
+	     class="active">{{num}}</a> 
+      {% else %}
+	  <a href="?{{querystring}}page={{ num }}" 
+	     title="Ir a la página {{num}}">{{num}}</a> 
+      {% endifequal %}
+      {% if not forloop.last %} | {% endif %}
+  {% endfor %}
+  {% if has_next %} | <a href="?{{querystring}}page={{ next }}" 
+			 title="Next page" class="right_side">Next &gt;&gt;</a> 
+  {% endif %}
+</div><!-- end of .paginator -->
+{% endspaceless %}

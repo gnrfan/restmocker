@@ -1,0 +1,30 @@
+{% extends "base.html" %}{% load paginator %}
+{% block content %}
+<p><a href="{% url realm_index %}">Back to the realms list</a></p>
+<h1>Documents</h1>
+{% if object_list %}
+<ul id="document_list">
+{% for document in object_list %}
+<li>
+<p class="document_title">{{ document.title }}</p>
+<dl>
+<dt>Description:</dt>
+<dd>{% if document.description %}{{ document.description }}{% else %}<em>No description available.</em>{% endif %}</dd>
+<dt>Sample URI:</dt>
+<dd>{% if document.sample_uri %}<a href="{{ document.get_sample_uri }}" target="_blank">{{ document.get_sample_uri }}</a> (<a href="{{ document.get_sample_uri }}?mimetype=text/plain" target="_blank">plain text</a>){% else %}<em>No description available.</em>{% endif %}</dd>
+<dt>Regexp:</dt>
+<dd><pre class="regexp">{{ document.regexp }}</pre></dd>
+<dt>Template:</dt>
+<dd><pre class="template">{{ document.template }}</pre></dd>
+<dt>Last modified:</dt>
+<dd>{{ document.get_last_modified }}</dd>
+</dl>
+</li>
+{% endfor %}
+</ul>
+{% if is_paginated %}{% paginator %}{% endif %}
+{% else %}
+<p>No documents available in this realm. Please create some on the admin.</p>
+{% endif %}
+<p><a href="{% url realm_index %}">Back to the realms list</a></p>
+{% endblock %}

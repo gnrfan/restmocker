@@ -1,0 +1,120 @@
+/* Set HTML5 elements to display:block */
+section, article, header, footer, nav, aside, hgroup {display: block;}
+
+/* Normalizes margin, padding */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, p, blockquote, th, td 
+{ margin : 0; padding : 0; }
+
+/* Normalizes font-size for headers */
+h1,h2,h3,h4,h5,h6 { font-size : 100%; }
+
+/* Removes list-style from lists */
+ol,ul { list-style : none; }
+
+/* Normalizes font-style and font-weight to normal */
+address, caption, cite, code, dfn, em, strong, th, var
+{ font-style : normal; font-weight : normal; }
+
+/* Removes spacing in tables */
+table { border-collapse : collapse; border-spacing : 0; }
+
+/* Removes border from fieldset and img */
+fieldset,img { border : 0; }
+
+/* Left-aligns text in caption and th */
+caption,th { text-align : left; }
+
+/* Removes quotation marks from q */
+q:before, q:after { content :''; }
+
+/* Removes border from abbr */
+abbr {border:none;}
+
+body {
+font-family: Helvetica, Arial, Sans-Serif;
+font-size: 18px;
+line-height: 1.4;
+}
+
+a, a:visited {
+color: #595e5e;
+}
+
+p { margin-bottom: 20px; }
+
+h1 { 
+font-size: 32px; 
+margin-top: 35px;
+margin-bottom: 15px;
+}
+
+h2 { 
+font-size: 24px; 
+margin-top: 30px;
+margin-bottom: 10px;
+}
+
+h1, h2, h3, h4 {
+line-height: 1;
+}
+
+ul {
+margin-top: 10px;
+margin-bottom: 20px;
+}
+
+li {
+margin-bottom: 5px;
+text-indent: 5px;
+}
+
+#header, #section, #nav, #footer {
+padding: 20px 20px 30px 20px;
+margin: 0 auto;
+}
+
+#main_content {
+padding: 20px 20px 30px 20px;
+}
+
+nav, header {
+padding: 0px 20px 0px 20px;
+}
+
+footer {
+padding-top: 20px;
+margin-top: 60px;
+border-top: 1px solid #ccc;
+}
+
+footer p {
+font-size: 14px;
+color: #333;
+}
+
+#header {
+}
+
+#logo a {
+display: block;
+text-indent: -9999px;
+background: url(../images/restmocker.png) no-repeat 0 0;
+width: 472px;
+height: 58px;
+}
+
+#document_list dl dt {
+font-weight: bold;
+}
+
+.document_title {
+font-size: 24px;
+font-weight: bold;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+pre {
+font-family: Monaco, Consolas, Courier, "Courier New", "Andale Mono", "DejaVu Sans Mono";
+font-size: 14px;
+}
