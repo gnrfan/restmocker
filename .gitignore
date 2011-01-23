@@ -1,4 +1,4 @@
-restmocker.db
+project/restmocker.db
 local_settings.py
 *.pyc
 *.swp
