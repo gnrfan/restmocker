@@ -14,6 +14,11 @@ The administrator's UI is mostly a vanilla Django admin one but works nicely for
 
 At Bit Zeppelin, we're using this tool for easing up our iPhone developing tasks. We hope this little product is helpful for you. 
 
+Verb support
+============
+
+For now, only GET operations are supported. Support for PUT, POST and DELETE is planned but still in the pipeline. We're adding features as we need them so please stay tuned or send us pull requests with patches.
+
 License
 =======
 
