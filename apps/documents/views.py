@@ -35,7 +35,7 @@ def document_etag(request, realm_prefix, reminder):
         documents = realm.document_set.all().order_by('-regexp')
         for doc in documents:
             if doc.match(reminder):
-                return doc.get_etag()
+                return doc.get_etag(request, reminder)
     except Realm.DoesNotExist:
         pass
 
@@ -67,6 +67,13 @@ def document_view(request, realm_prefix, reminder):
                 mimetype = forced_mimetype
             else:
                 mimetype = doc.mime_type
-            response = HttpResponse(doc.render_template(reminder), mimetype=mimetype)
+            if doc.attachment and doc.use_attachment:
+                content = doc.attachment.read(doc.attachment.size)
+                response = HttpResponse(content, mimetype=mimetype)
+                response['Accept-Ranges'] = 'bytes'
+                response['Content-Length'] = doc.attachment.size
+            else:
+                content = doc.render_template(reminder)
+                response = HttpResponse(content, mimetype=mimetype)
             return response
     raise Http404

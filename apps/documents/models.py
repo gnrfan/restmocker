@@ -52,6 +52,11 @@ class Document(models.Model):
     mime_type = models.CharField(strings.MIME_TYPE, max_length=128, 
         default='application/json')
     sample_uri = models.CharField(strings.SAMPLE_URI, max_length=255, null=True, blank=True)
+    attachment = models.FileField(strings.ATTACHMENT,
+        upload_to='attachments/',
+        blank=True, null=True)
+    use_attachment = models.BooleanField(strings.USE_ATTACHMENT, 
+        default=False, help_text=strings.USE_ATTACHMENT_HELP)
     created_at = CreationDateTimeField(strings.CREATED_AT)
     updated_at = ModificationDateTimeField(strings.UPDATED_AT)
 
@@ -85,12 +90,29 @@ class Document(models.Model):
         result = self.realm.apply_text_substitutions(result)
         return result
 
+    def get_content_hash(self, uri_fragment):
+        if self.attachment and self.use_attachment:
+            content = self.attachment.read(self.attachment.size)
+            return hashlib.sha1(content).hexdigest()
+        else:
+            content = self.render_template(uri_fragment)
+            return hashlib.sha1(content).hexdigest()
+
     def get_last_modified(self):
         return self.updated_at if self.updated_at else self.created_at
 
-    def get_etag(self):
+    def get_url(self, request):
+        return "http://%s%s" % (request.META['SERVER_NAME'], request.path)
+
+    def get_etag(self, request, uri_fragment):
         ts = self.get_last_modified()
-        return hashlib.sha1(str(ts)).hexdigest()
+        url = self.get_url(request) 
+        etag_key = '-'.join([
+            hashlib.sha1(url).hexdigest(),
+            self.get_content_hash(uri_fragment),
+            hashlib.sha1(str(ts)).hexdigest()
+        ])
+        return hashlib.sha1(etag_key).hexdigest()
 
     def get_sample_uri(self):
         site = Site.objects.get_current()

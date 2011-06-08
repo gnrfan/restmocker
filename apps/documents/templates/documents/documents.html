@@ -16,6 +16,14 @@
 <dd><pre class="regexp">{{ document.regexp }}</pre></dd>
 <dt>Template:</dt>
 <dd><pre class="template">{{ document.template }}</pre></dd>
+{% if document.attachment %}
+<dt>Attachment size:</dt>
+<dd><pre class="template">{{ document.attachment.size }} bytes</pre></dd>
+<dt>Attachment url:</dt>
+<dd><pre class="template"><a href="{{ document.attachment.url }}" target="_blank">{{ document.attachment.url }}</a></pre></dd>
+<dt>Use attachment:</dt>
+<dd><pre class="template">{% if document.attachment.use_attachment %}Yes{% else %}No{% endif %}</pre></dd>
+{% endif %}
 <dt>Last modified:</dt>
 <dd>{{ document.get_last_modified }}</dd>
 </dl>

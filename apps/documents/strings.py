@@ -18,4 +18,6 @@ DOCUMENT_PLURAL = _(u'Documents')
 SAMPLE_URI = _(u'Sample URI')
 TEXT_SUBSTITUTION = _(u'Text substitution')
 TEXT_SUBSTITUTION_PLURAL = _(u'Text substitutions')
-
+ATTACHMENT = _(u'Attachment')
+USE_ATTACHMENT = _(u'Use attachment')
+USE_ATTACHMENT_HELP = _(u'Use attachment instead of template. You must set proper content type manually.')
