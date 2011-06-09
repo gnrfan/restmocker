@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import hashlib
+import datetime
 from django.http import HttpResponse, Http404
 from django.views.generic.simple import direct_to_template
 from django.views.generic.list_detail import object_list
