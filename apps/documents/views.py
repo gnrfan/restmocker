@@ -76,5 +76,7 @@ def document_view(request, realm_prefix, reminder):
             else:
                 content = doc.render_template(reminder)
                 response = HttpResponse(content, mimetype=mimetype)
+                response['Accept-Ranges'] = 'bytes'
+                response['Content-Length'] = len(content)
             return response
     raise Http404
