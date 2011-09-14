@@ -8,7 +8,7 @@ from documents.models import Realm, Document, TextSubstitution
 from documents import strings
 
 class RealmAdmin(admin.ModelAdmin):
-    list_display = ('name', 'prefix', 'document_count', 'created', )
+    list_display = ('name', 'prefix', 'document_count', 'created_at', )
     search_fields = ('name', 'description', )
 
     def document_count(self, instance):
@@ -18,7 +18,7 @@ class RealmAdmin(admin.ModelAdmin):
 admin.site.register(Realm, RealmAdmin)
 
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('title', 'realm', 'use_attachment', 'created', )
+    list_display = ('title', 'realm', 'use_attachment', 'created_at', )
     search_fields = ('title', 'realm', 'description', )
     list_filter = ('realm', 'use_attachment', )
 
