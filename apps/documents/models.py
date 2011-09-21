@@ -90,6 +90,12 @@ class Document(models.Model):
         result = self.realm.apply_text_substitutions(result)
         return result
 
+    def render_as_text(self, uri_fragment):
+        result = self.render_template(uri_fragment)
+        result = result.replace('\r\n', '\\n')
+        result = result.replace('"', '\\"')
+        return result
+
     def get_content_hash(self, uri_fragment):
         if self.attachment and self.use_attachment:
             content = self.attachment.read(self.attachment.size)

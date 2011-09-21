@@ -61,6 +61,7 @@ def document_view(request, realm_prefix, reminder):
     realm = get_object_or_404(Realm, prefix=realm_prefix)
     reminder = '/' + reminder
     forced_mimetype = request.GET.get('mimetype', None)
+    callback = request.GET.get('callback', None)
     documents = realm.document_set.all().order_by('-regexp')
     for doc in documents:
         if doc.match(reminder):
@@ -74,7 +75,13 @@ def document_view(request, realm_prefix, reminder):
                 response['Accept-Ranges'] = 'bytes'
                 response['Content-Length'] = doc.attachment.size
             else:
-                content = doc.render_template(reminder)
+                if callback:
+                    content = '%s("%s");' % (
+                        callback,
+                        doc.render_as_text(reminder)
+                    )
+                else:
+                    content = doc.render_template(reminder)
                 response = HttpResponse(content, mimetype=mimetype)
                 response['Accept-Ranges'] = 'bytes'
                 response['Content-Length'] = len(content)
