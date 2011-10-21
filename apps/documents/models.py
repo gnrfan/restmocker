@@ -99,10 +99,10 @@ class Document(models.Model):
     def get_content_hash(self, uri_fragment):
         if self.attachment and self.use_attachment:
             content = self.attachment.read(self.attachment.size)
-            return hashlib.sha1(content).hexdigest()
+            return hashlib.sha1(content.encode('utf8')).hexdigest()
         else:
             content = self.render_template(uri_fragment)
-            return hashlib.sha1(content).hexdigest()
+            return hashlib.sha1(content.encode('utf8')).hexdigest()
 
     def get_last_modified(self):
         return self.updated_at if self.updated_at else self.created_at
