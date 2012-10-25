@@ -1,0 +1,23 @@
+# Common requirements
+# -----------------------
+# This file collects all required third-party applications that are needed
+# to run this project. Later you can install all these apps in a row
+# using pip. Example:
+#
+#     pip install -r requirements.txt
+#
+PIL
+django
+django_extensions
+django-admin-tools
+south
+feedparser
+ordereddict
+python-dateutil
+rfc3339
+sorl-thumbnail==11.12
+unidecode
+## Development
+django-debug-toolbar
+werkzeug
+requests
