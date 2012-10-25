@@ -64,14 +64,18 @@ def document_view(request, realm_prefix, reminder):
     callback = request.GET.get('callback', None)
     documents = realm.document_set.all().order_by('-regexp')
     for doc in documents:
-        if doc.match(reminder):
+        if doc.match(reminder, request.method):
             if forced_mimetype:
                 mimetype = forced_mimetype
             else:
                 mimetype = doc.mime_type
             if doc.attachment and doc.use_attachment:
                 content = doc.attachment.read(doc.attachment.size)
-                response = HttpResponse(content, mimetype=mimetype)
+                response = HttpResponse(
+                    content=content, 
+                    mimetype=mimetype, 
+                    status_code=doc.status_code
+                )
                 response['Accept-Ranges'] = 'bytes'
                 response['Content-Length'] = doc.attachment.size
             else:

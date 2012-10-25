@@ -15,6 +15,7 @@ from django.contrib.sites.models import Site
 from django_extensions.db.fields import CreationDateTimeField
 from django_extensions.db.fields import ModificationDateTimeField
 
+from httpplus.constants import HTTP_STATUS_CODE_CHOICES
 from documents import constants, strings
 
 class Realm(models.Model):
@@ -48,10 +49,25 @@ class Document(models.Model):
     title = models.CharField(strings.TITLE, max_length=128)
     regexp = models.CharField(strings.REGEXP, max_length=255)
     template = models.TextField(strings.TEMPLATE)
+    verbs = models.CharField(
+        strings.VERBS, 
+        max_length=128, 
+        default=constants.DEFAULT_VERBS
+    )
     description = models.TextField(strings.DESCRIPTION, null=True, blank=True)
     mime_type = models.CharField(strings.MIME_TYPE, max_length=128, 
         default='application/json')
-    sample_uri = models.CharField(strings.SAMPLE_URI, max_length=255, null=True, blank=True)
+    status_code = models.PositiveIntegerField(
+        strings.STATUS_CODE,
+        choices=HTTP_STATUS_CODE_CHOICES,
+        default=200
+    )
+    sample_uri = models.CharField(
+        strings.SAMPLE_URI, 
+        max_length=255, 
+        null=True, 
+        blank=True
+    )
     attachment = models.FileField(strings.ATTACHMENT,
         upload_to='attachments/',
         blank=True, null=True)
@@ -71,9 +87,19 @@ class Document(models.Model):
     def get_regexp(self):
         return re.compile(self.regexp)
 
-    def match(self, uri_fragment):
+    def get_verbs(self):
+        return tuple([v.strip().upper() for v in self.verbs.split(',')])
+
+    def method_matches(self, method):
+        return method in self.get_verbs()
+
+    def regexp_matches(self, uri_fragment):
         regexp = self.get_regexp()
         return bool(regexp.match(uri_fragment))
+
+    def match(self, uri_fragment, method='GET'):
+        return self.regexp_matches(uri_fragment) and \
+            self.method_matches(method)
 
     def get_context_dict(self, uri_fragment):
         result = {}
