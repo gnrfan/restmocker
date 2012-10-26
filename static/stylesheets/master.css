@@ -105,11 +105,19 @@ height: 58px;
 
 #document_list dl dt {
 font-weight: bold;
+margin-bottom: 10px;
 }
 
 .document_title {
 font-size: 24px;
 font-weight: bold;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
+pre.regexp {
+font-family: Consolas, Courier, "Courier New", "Andale Mono", "DejaVu Sans Mono";
+font-size: 18px;
 margin-top: 20px;
 margin-bottom: 20px;
 }
