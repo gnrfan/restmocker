@@ -9,7 +9,7 @@
 <p class="document_title">{{ document.title }}</p>
 <dl>
 <dt>Description:</dt>
-<dd>{% if document.description %}{{ document.description }}{% else %}<em>No description available.</em>{% endif %}</dd>
+<dd>{% if document.description %}<pre class="template">{{ document.description }}</pre>{% else %}<em>No description available.</em>{% endif %}</dd>
 <dt>Sample URI:</dt>
 <dd>{% if document.sample_uri %}<a href="{{ document.get_sample_uri }}" target="_blank">{{ document.get_sample_uri }}</a> (<a href="{{ document.get_sample_uri }}?mimetype=text/plain" target="_blank">plain text</a>){% else %}<em>No description available.</em>{% endif %}</dd>
 <dt>Regexp:</dt>
