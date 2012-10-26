@@ -105,6 +105,7 @@ height: 58px;
 
 #document_list dl dt {
 font-weight: bold;
+margin-top: 10px;
 margin-bottom: 10px;
 }
 
