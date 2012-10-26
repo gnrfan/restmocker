@@ -43,6 +43,25 @@ class Realm(models.Model):
             text = result[0]
         return text
     
+class DocumentManager(models.Manager):
+
+    def drafts(self):
+        status = Document.PUBLICATION_STATUS_CHOICES.DRAFT
+        return self.filter(publication_status=status)
+
+    def in_preview(self):
+        status = Document.PUBLICATION_STATUS_CHOICES.PREVIEW
+        return self.filter(publication_status=status)
+
+    def published(self):
+        status = Document.PUBLICATION_STATUS_CHOICES.PUBLISHED
+        return self.filter(publication_status=status)
+
+    def renderable(self):
+        status = Document.PUBLICATION_STATUS_CHOICES.DRAFT
+        return self.exclude(publication_status=status)
+
+
 class Document(models.Model):
     """
     Represents a response returned by the web service.
@@ -91,6 +110,8 @@ class Document(models.Model):
     )
     created_at = CreationDateTimeField(strings.CREATED_AT)
     updated_at = ModificationDateTimeField(strings.UPDATED_AT)
+
+    objects = DocumentManager()
 
     class Meta:
         ordering = ('title','created_at', )

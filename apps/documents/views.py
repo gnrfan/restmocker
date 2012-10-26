@@ -24,7 +24,7 @@ def realm_index(request):
 
 def document_index(request, realm_prefix):
     realm = get_object_or_404(Realm, prefix=realm_prefix)
-    documents = realm.document_set.all().order_by('title', 'status_code')
+    documents = realm.document_set.published().order_by('title', 'status_code')
     return object_list(request, documents,
         template_name='documents/documents.html', 
         paginate_by=documents_settings.DOCUMENT_PAGINATE_BY,
@@ -65,7 +65,7 @@ def document_view(request, realm_prefix, reminder):
     reminder = '/' + reminder
     forced_mimetype = request.GET.get('mimetype', None)
     callback = request.GET.get('callback', None)
-    documents = realm.document_set.all().order_by('-regexp')
+    documents = realm.document_set.renderable().order_by('-regexp')
     for doc in documents:
         response_class = HTTP_RESPONSE_CLASS_MAP[doc.status_code]
         if doc.match(reminder, request.method, request.META):
