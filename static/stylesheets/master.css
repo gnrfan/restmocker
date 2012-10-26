@@ -114,7 +114,9 @@ margin-top: 20px;
 margin-bottom: 20px;
 }
 
-pre {
-font-family: Monaco, Consolas, Courier, "Courier New", "Andale Mono", "DejaVu Sans Mono";
+pre.template {
+font-family: Consolas, Courier, "Courier New", "Andale Mono", "DejaVu Sans Mono";
 font-size: 14px;
+margin-top: 20px;
+margin-bottom: 20px;
 }
