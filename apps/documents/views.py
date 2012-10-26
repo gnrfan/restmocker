@@ -64,7 +64,7 @@ def document_view(request, realm_prefix, reminder):
     callback = request.GET.get('callback', None)
     documents = realm.document_set.all().order_by('-regexp')
     for doc in documents:
-        if doc.match(reminder, request.method):
+        if doc.match(reminder, request.method, request.META):
             if forced_mimetype:
                 mimetype = forced_mimetype
             else:

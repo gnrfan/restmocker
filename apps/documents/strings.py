@@ -27,3 +27,4 @@ USE_ATTACHMENT_HELP = _(
 DOCUMENT_COUNT_SD = _(u'Document count')
 STATUS_CODE = _(u'Status code')
 VERBS = _(u'HTTP verbs')
+HEADERS = _(u'HTTP headers')

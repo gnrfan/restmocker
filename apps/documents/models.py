@@ -62,6 +62,7 @@ class Document(models.Model):
         choices=HTTP_STATUS_CODE_CHOICES,
         default=200
     )
+    headers = models.TextField(strings.HEADERS, null=True, blank=True)
     sample_uri = models.CharField(
         strings.SAMPLE_URI, 
         max_length=255, 
@@ -97,9 +98,36 @@ class Document(models.Model):
         regexp = self.get_regexp()
         return bool(regexp.match(uri_fragment))
 
-    def match(self, uri_fragment, method='GET'):
+    def headers_match(self, headers={}):
+        doc_headers = self.get_django_headers()
+        for h,v in doc_headers.iteritems():
+            if h not in headers or \
+                headers[h] != v:
+                return False
+        return True
+
+    def match(self, uri_fragment, method='GET', headers={}):
         return self.regexp_matches(uri_fragment) and \
-            self.method_matches(method)
+            self.method_matches(method) and \
+            self.headers_match(headers)
+
+    def get_headers_as_dict(self):
+        if self.headers is not None:
+            return dict([
+                [i.strip() for i in l.split(':')] \
+                for l in self.headers.splitlines() if ":" in l
+            ])
+        else:
+            return {}
+
+    def get_django_headers(self):
+        result = {}
+        headers = self.get_headers_as_dict()
+        for h,v in headers.iteritems():
+            h = "HTTP_%s" % h
+            h = h.upper().replace('-', '_') 
+            result[h] = v
+        return result
 
     def get_context_dict(self, uri_fragment):
         result = {}
