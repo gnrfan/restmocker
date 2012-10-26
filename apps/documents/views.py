@@ -24,7 +24,7 @@ def realm_index(request):
 
 def document_index(request, realm_prefix):
     realm = get_object_or_404(Realm, prefix=realm_prefix)
-    documents = realm.document_set.all()
+    documents = realm.document_set.all().order_by('title', 'status_code')
     return object_list(request, documents,
         template_name='documents/documents.html', 
         paginate_by=documents_settings.DOCUMENT_PAGINATE_BY,
