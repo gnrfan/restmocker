@@ -90,7 +90,7 @@ def document_view(request, realm_prefix, reminder):
                 else:
                     content = doc.render_template(reminder)
                 if doc.status_code in [204, 405]:
-                    response = response_class()
+                    response = response_class('')
                 else:
                     response = response_class(content, mimetype=mimetype)
                     response['Accept-Ranges'] = 'bytes'

@@ -48,7 +48,7 @@ class Document(models.Model):
     realm = models.ForeignKey(Realm, verbose_name=strings.REALM)
     title = models.CharField(strings.TITLE, max_length=128)
     regexp = models.CharField(strings.REGEXP, max_length=255)
-    template = models.TextField(strings.TEMPLATE)
+    template = models.TextField(strings.TEMPLATE, null=True, blank=True)
     verbs = models.CharField(
         strings.VERBS, 
         max_length=128, 
