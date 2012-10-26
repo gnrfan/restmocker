@@ -29,3 +29,8 @@ STATUS_CODE = _(u'Status code')
 VERBS = _(u'HTTP verbs')
 HEADERS = _(u'HTTP headers')
 USAGE = _(u'Usage')
+PUBLICATION_STATUS = _(u'Publication status')
+
+DRAFT = _(u'Draft')
+PREVIEW = _(u'Preview')
+PUBLISHED = _(u'Published')

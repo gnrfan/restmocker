@@ -15,6 +15,8 @@ from django.contrib.sites.models import Site
 from django_extensions.db.fields import CreationDateTimeField
 from django_extensions.db.fields import ModificationDateTimeField
 
+from common.datastructures import Enumeration
+
 from httpplus.constants import HTTP_STATUS_CODE_CHOICES
 from documents import constants, strings
 
@@ -45,6 +47,13 @@ class Document(models.Model):
     """
     Represents a response returned by the web service.
     """
+    
+    PUBLICATION_STATUS_CHOICES = Enumeration([
+        (1, 'DRAFT', strings.DRAFT),
+        (2, 'PREVIEW', strings.PREVIEW),
+        (3, 'PUBLISHED', strings.PUBLISHED)
+    ])
+
     realm = models.ForeignKey(Realm, verbose_name=strings.REALM)
     title = models.CharField(strings.TITLE, max_length=128)
     regexp = models.CharField(strings.REGEXP, max_length=255)
@@ -75,6 +84,11 @@ class Document(models.Model):
     use_attachment = models.BooleanField(strings.USE_ATTACHMENT, 
         default=False, help_text=strings.USE_ATTACHMENT_HELP)
     usage = models.TextField(strings.USAGE, null=True, blank=True)
+    publication_status = models.PositiveIntegerField(
+        strings.PUBLICATION_STATUS,
+        choices=PUBLICATION_STATUS_CHOICES,
+        default=PUBLICATION_STATUS_CHOICES.DRAFT
+    )
     created_at = CreationDateTimeField(strings.CREATED_AT)
     updated_at = ModificationDateTimeField(strings.UPDATED_AT)
 
