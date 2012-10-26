@@ -74,6 +74,7 @@ class Document(models.Model):
         blank=True, null=True)
     use_attachment = models.BooleanField(strings.USE_ATTACHMENT, 
         default=False, help_text=strings.USE_ATTACHMENT_HELP)
+    usage = models.TextField(strings.USAGE, null=True, blank=True)
     created_at = CreationDateTimeField(strings.CREATED_AT)
     updated_at = ModificationDateTimeField(strings.UPDATED_AT)
 

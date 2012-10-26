@@ -26,6 +26,10 @@
 {% endif %}
 <dt>Last modified:</dt>
 <dd>{{ document.get_last_modified }}</dd>
+{% if document.usage %}
+<dt>Usage:</dt>
+<dd><pre class="template">{{ document.usage }}</pre></dd>
+{% endif %}
 </dl>
 </li>
 {% endfor %}
