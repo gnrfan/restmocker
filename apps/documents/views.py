@@ -3,6 +3,7 @@
 import hashlib
 import datetime
 from django.http import HttpResponse, Http404
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.simple import direct_to_template
 from django.views.generic.list_detail import object_list
 from django.views.decorators.http import condition
@@ -56,6 +57,7 @@ def document_last_modified(request, realm_prefix, reminder):
 
     return datetime.datetime.now()
 
+@csrf_exempt
 @condition(etag_func=document_etag, last_modified_func=document_last_modified)
 def document_view(request, realm_prefix, reminder):
     realm = get_object_or_404(Realm, prefix=realm_prefix)
