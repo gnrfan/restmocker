@@ -17,6 +17,8 @@ python-dateutil
 rfc3339
 sorl-thumbnail==11.12
 unidecode
+# Monitoring
+# newrelic
 ## Development
 django-debug-toolbar
 werkzeug
