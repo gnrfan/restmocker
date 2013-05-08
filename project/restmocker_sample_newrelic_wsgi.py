@@ -4,10 +4,6 @@ import site
 from os.path import dirname, join, realpath
 from distutils.sysconfig import get_python_lib
 
-# Newrelic integration
-import newrelic.agent
-newrelic.agent.initialize('newrelic.ini')
-
 ROOT_DIR = realpath(join(dirname(__file__), '..'))
 PYTHON_VERSION = '%d.%d' % (sys.version_info[0], sys.version_info[1])
 
@@ -57,4 +53,10 @@ os.environ['PYTHON_EGG_CACHE'] = '/tmp/egg-cache'
 
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
+
+# Newrelic integration
+import newrelic.agent
+
+NEWRELIC_CONFIG = realpath(join(PROJ_DIR, 'newrelic.ini'))
+newrelic.agent.initialize(NEWRELIC_CONFIG)
 application = newrelic.agent.wsgi_application()(application)
