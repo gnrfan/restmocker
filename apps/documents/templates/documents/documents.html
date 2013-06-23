@@ -14,6 +14,10 @@
 <dd>{% if document.sample_uri %}<a href="{{ document.get_sample_uri }}" target="_blank">{{ document.get_sample_uri }}</a> (<a href="{{ document.get_sample_uri }}?mimetype=text/plain" target="_blank">plain text</a>){% else %}<em>No description available.</em>{% endif %}</dd>
 <dt>Regexp:</dt>
 <dd><pre class="regexp">{{ document.regexp }}</pre></dd>
+<dt>Verbs:</dt>
+<dd><pre class="regexp">{{ document.verbs }}</pre></dd>
+<dt>Headers:</dt>
+<dd><pre class="regexp">{{ document.headers }}</pre></dd>
 <dt>Template:</dt>
 <dd><pre class="template">{{ document.template }}</pre></dd>
 {% if document.attachment %}
