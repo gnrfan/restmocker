@@ -17,11 +17,16 @@ At Bit Zeppelin, we're using this tool for easing up our iPhone developing tasks
 Verb support
 ============
 
-For now, only GET operations are supported. Support for PUT, POST and DELETE is planned but still in the pipeline. We're adding features as we need them so please stay tuned or send us pull requests with patches.
+All HTTP verbs areare supported. 
+
+Header support
+==============
+
+Each document will match the combination of URI + VERB + headers. By returning different responses (including status code and headers) when certain request headers match you can simulated different scenarios. E.g. Using a header named "X-Simulated-Case: missing mandatory parameter".
 
 License
 =======
 
 RESTMocker is distributed under the BSD license.
 
-(C) 2011 - Antonio Ognio <antonio@bitzeppelin.com>
+(C) 2011 - 2013 Antonio Ognio <antonio@bitzeppelin.com>
