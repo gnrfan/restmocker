@@ -44,7 +44,7 @@ class HttpResponseSeeOther(HttpResponse):
 class HttpResponseUseProxy(HttpResponse):
     status_code = 305
 
-class HttpResponseTemporaryRedirect(HttpResponseRedirectBase):
+class HttpResponseTemporaryRedirect(HttpResponseRedirect):
     status_code = 307
 
 class HttpResponseResumeIncomplete(HttpResponse):
