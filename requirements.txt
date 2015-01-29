@@ -7,7 +7,7 @@
 #     pip install -r requirements.txt
 #
 PIL
-django
+django==1.4
 django_extensions
 django-admin-tools
 south
