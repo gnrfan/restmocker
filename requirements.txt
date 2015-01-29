@@ -13,7 +13,7 @@ south
 feedparser
 ordereddict
 python-dateutil
-rfc3339
+-e git+https://github.com/gnrfan/rfc3339.git@HEAD#egg=rfc3339
 sorl-thumbnail==11.12
 unidecode
 # Monitoring
